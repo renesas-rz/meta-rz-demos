@@ -17,7 +17,7 @@ EXTRA_OECMAKE = "-DLIB_INSTALL_DIR=${baselib}"
 EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON"
 S = "${WORKDIR}/git"
 
-LVGL_CONFIG_LV_MEM_CUSTOM ?= "0"
+LVGL_CONFIG_LV_MEM_CUSTOM ?= "1"
 LVGL_CONFIG_LV_COLOR_DEPTH ?= "32"
 
 # Upstream does not support a default configuration
