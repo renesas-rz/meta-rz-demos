@@ -40,3 +40,5 @@ FILES:${PN}-dev += "\
     ${includedir}/${PN}/ \
     ${includedir}/${PN}/lvgl/ \
     "
+
+ALLOW_EMPTY_${PN} = "1"
