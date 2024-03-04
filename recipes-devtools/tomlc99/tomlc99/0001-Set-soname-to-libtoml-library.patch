@@ -1,0 +1,48 @@
+From 6bac593e4742fd9670e9eb741fd182e801ea1c7e Mon Sep 17 00:00:00 2001
+From: Yoshihito Ogawa <yoshihito.ogawa.kc@renesas.com>
+Date: Wed, 17 Jan 2024 14:35:48 +0900
+Subject: [PATCH] Set soname to libtoml library
+
+Signed-off-by: Yoshihito Ogawa <yoshihito.ogawa.kc@renesas.com>
+---
+ Makefile | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 599f7db..48fa60f 100644
+--- a/Makefile
++++ b/Makefile
+@@ -6,9 +6,12 @@ EXEC = toml_json toml_cat toml_sample
+ PCFILE = libtoml.pc
+ 
+ CFLAGS = -std=c99 -Wall -Wextra -fpic
+-LIB_VERSION = 1.0
++LIB_MAJOR_VER = 1
++LIB_MINOR_VER = 0
++LIB_VERSION = $(LIB_MAJOR_VER).$(LIB_MINOR_VER)
+ LIB = libtoml.a
+ LIB_SHARED = libtoml.so.$(LIB_VERSION)
++LIB_SONAME = libtoml.so.$(LIB_MAJOR_VER)
+ 
+ # to compile for debug: make DEBUG=1
+ # to compile for no debug: make
+@@ -18,7 +21,6 @@ else
+     CFLAGS += -O2 -DNDEBUG
+ endif
+ 
+-
+ all: $(LIB) $(LIB_SHARED) $(EXEC)
+ 
+ *.o: $(HFILES)
+@@ -27,7 +29,7 @@ libtoml.a: toml.o
+ 	ar -rcs $@ $^
+ 
+ libtoml.so.$(LIB_VERSION): toml.o
+-	$(CC) -shared -o $@ $^
++	$(CC) -Wl,-soname,$(LIB_SONAME) -shared -o $@ $^
+ 
+ $(EXEC): $(LIB)
+ 
+-- 
+2.25.1
+
