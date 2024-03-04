@@ -14,6 +14,7 @@ SRCREV = "9ec3b8706b098f60940cee6ac211d3cb3141aedf"
 inherit cmake
 
 EXTRA_OECMAKE = "-DLIB_INSTALL_DIR=${baselib}"
+EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON"
 S = "${WORKDIR}/git"
 
 LVGL_CONFIG_LV_MEM_CUSTOM ?= "0"
@@ -42,3 +43,6 @@ FILES:${PN}-dev += "\
     "
 
 ALLOW_EMPTY_${PN} = "1"
+
+SOLIBS = ".so"
+FILES_SOLIBSDEV = ""

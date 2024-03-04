@@ -18,6 +18,7 @@ LVGL_CONFIG_WAYLAND_HOR_RES ?= "480"
 LVGL_CONFIG_WAYLAND_VER_RES ?= "320"
 
 EXTRA_OECMAKE += "-Dinstall:BOOL=ON -DLIB_INSTALL_DIR=${baselib}"
+EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON"
 
 do_configure:append() {
     # If there is a configuration template, start from that
@@ -44,3 +45,6 @@ do_configure:append() {
         \
         -i "${S}/lv_drv_conf.h"
 }
+
+SOLIBS = ".so"
+FILES_SOLIBSDEV = ""
