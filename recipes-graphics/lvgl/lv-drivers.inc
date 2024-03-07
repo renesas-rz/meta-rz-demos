@@ -17,6 +17,10 @@ LVGL_CONFIG_USE_WAYLAND = "${@bb.utils.contains('PACKAGECONFIG', 'wayland', '1',
 LVGL_CONFIG_WAYLAND_HOR_RES ?= "480"
 LVGL_CONFIG_WAYLAND_VER_RES ?= "320"
 
+USE_WAYLAND_TIMER_HANDLER = "1"
+LVGL_CONFIG_WAYLAND_TIMER_HANDLER = "${@oe.utils.conditional('USE_WAYLAND_TIMER_HANDLER', '1', \
+'#  define LV_WAYLAND_TIMER_HANDLER', '#  undef LV_WAYLAND_TIMER_HANDLER', d)}"
+
 EXTRA_OECMAKE += "-Dinstall:BOOL=ON -DLIB_INSTALL_DIR=${baselib}"
 EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON"
 
@@ -42,6 +46,8 @@ do_configure:append() {
         -e "s|\(^#  define USE_WAYLAND \).*|#  define USE_WAYLAND ${LVGL_CONFIG_USE_WAYLAND}|g" \
         -e "s|\(^ *# *define *WAYLAND_HOR_RES *\).*|\1${LVGL_CONFIG_WAYLAND_HOR_RES}|g" \
         -e "s|\(^ *# *define *WAYLAND_VER_RES *\).*|\1${LVGL_CONFIG_WAYLAND_VER_RES}|g" \
+        \
+	-e "/#if USE_WAYLAND/a ${LVGL_CONFIG_WAYLAND_TIMER_HANDLER}" \
         \
         -i "${S}/lv_drv_conf.h"
 }
