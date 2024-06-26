@@ -26,5 +26,3 @@ TARGET_CFLAGS += "-I${STAGING_INCDIR}/lvgl"
 FILES:${PN}-dev += "\
     ${includedir}/lvgl/lv_drivers/ \
     "
-
-ALLOW_EMPTY_${PN} = "1"

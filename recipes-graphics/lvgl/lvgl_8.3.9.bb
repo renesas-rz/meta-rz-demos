@@ -42,7 +42,5 @@ FILES:${PN}-dev += "\
     ${includedir}/${PN}/lvgl/ \
     "
 
-ALLOW_EMPTY_${PN} = "1"
-
 SOLIBS = ".so"
 FILES_SOLIBSDEV = ""
