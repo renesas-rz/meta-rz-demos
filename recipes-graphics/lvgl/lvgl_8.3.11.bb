@@ -21,6 +21,9 @@ ALLOW_EMPTY:${PN} = "1"
 
 LVGL_CONFIG_LV_MEM_CUSTOM ?= "1"
 LVGL_CONFIG_LV_COLOR_DEPTH ?= "32"
+LVGL_CONFIG_LV_USE_FS_STDIO ?= "1"
+LVGL_CONFIG_LV_FS_STDIO_LETTER ?= "L"
+LVGL_CONFIG_LV_FS_STDIO_CACHE_SIZE ?= "4096"
 
 # Upstream does not support a default configuration
 # but propose a default "disabled" template, which is used as reference
@@ -35,6 +38,10 @@ do_configure:prepend() {
 	    -e "s|\(#define LV_TICK_CUSTOM \).*|\1 1|g" \
 	    -e "s|\(#define LV_TICK_CUSTOM_INCLUDE \).*|\1 <stdint.h>|g" \
 	    -e "s|\(#define LV_TICK_CUSTOM_SYS_TIME_EXPR \).*|extern uint32_t custom_tick_get(void);\n\1 (custom_tick_get())|g" \
+	    \
+	    -e "s|\(#define LV_USE_FS_STDIO .*\)0|\1${LVGL_CONFIG_LV_USE_FS_STDIO}|g" \
+	    -e "s|\(#define LV_FS_STDIO_LETTER .*\)\\\0|\1${LVGL_CONFIG_LV_FS_STDIO_LETTER}|g" \
+	    -e "s|\(#define LV_FS_STDIO_CACHE_SIZE *\)0|\1${LVGL_CONFIG_LV_FS_STDIO_CACHE_SIZE}|g" \
 	    \
             < "${S}/lv_conf_template.h" > "${S}/lv_conf.h"
 }
