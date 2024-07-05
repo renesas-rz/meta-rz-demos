@@ -17,15 +17,14 @@ do_install() {
 	# Install benchmark demo systemd service
 	install -D -m 0644 ${WORKDIR}/rz_benchmark_demo.service ${D}${systemd_system_unitdir}/rz_benchmark_demo.service
 
-	# Install benchmark demo start script
-	install -d ${D}/home/root
-	install -m 0755 ${WORKDIR}/start_demo.sh ${D}/home/root/start_demo.sh
-	install -m 0755 ${WORKDIR}/video-dec.sh ${D}/home/root/video-dec.sh
-	install -m 0755 ${WORKDIR}/video-enc.sh ${D}/home/root/video-enc.sh
-	install -m 0755 ${WORKDIR}/weston_demo.ini ${D}/home/root/weston_demo.ini
-
 	# Install benchmark demo icon
 	install -D -m 0644 ${WORKDIR}/icon_benchmark_demo.png ${D}${datadir}/benchmark_demo/icon_benchmark_demo.png
+
+	# Install benchmark demo start script
+	install -m 0755 ${WORKDIR}/start_demo.sh ${D}${datadir}/benchmark_demo/start_demo.sh
+	install -m 0755 ${WORKDIR}/video-dec.sh ${D}${datadir}/benchmark_demo/video-dec.sh
+	install -m 0755 ${WORKDIR}/video-enc.sh ${D}${datadir}/benchmark_demo/video-enc.sh
+	install -m 0755 ${WORKDIR}/weston_demo.ini ${D}${datadir}/benchmark_demo/weston_demo.ini
 }
 
 inherit features_check systemd
@@ -34,10 +33,10 @@ RDEPENDS_${PN} = "benchmark-demo"
 
 FILES_${PN} += " \
 	${systemd_system_unitdir}/rz_benchmark_demo.service \
-	/home/root/start_demo.sh \
-	/home/root/video-dec.sh \
-	/home/root/video-enc.sh \
-	/home/root/weston_demo.ini \
+	${datadir}/benchmark_demo/start_demo.sh \
+	${datadir}/benchmark_demo/video-dec.sh \
+	${datadir}/benchmark_demo/video-enc.sh \
+	${datadir}/benchmark_demo/weston_demo.ini \
 	${datadir}/benchmark_demo/icon_benchmark_demo.png \
 "
 

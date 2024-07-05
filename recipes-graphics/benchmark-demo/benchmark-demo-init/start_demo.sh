@@ -4,7 +4,7 @@
 if [ ! -e /etc/xdg/weston/weston.ini.bk ]
 then
 	mv /etc/xdg/weston/weston.ini /etc/xdg/weston/weston.ini.bk
-	cp /home/root/weston_demo.ini /etc/xdg/weston/weston.ini
+	cp /usr/share/benchmark_demo/weston_demo.ini /etc/xdg/weston/weston.ini
 fi
 
 if [ -z $XDG_RUNTIME_DIR ]
