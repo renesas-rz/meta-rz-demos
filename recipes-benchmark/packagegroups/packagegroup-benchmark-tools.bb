@@ -13,4 +13,5 @@ RDEPENDS_${PN} = "\
 	sysbench \
 	stress-ng \
 	coremark \
+	fio \
 "
