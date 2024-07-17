@@ -1,8 +1,9 @@
 SUMMARY = "RZ Linux benchmark demonstration software"
 SECTION = "application"
 
-LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ac55c209a96858b87de6e4b277a4a014"
+LICENSE = "MIT & OFL-1.1"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ac55c209a96858b87de6e4b277a4a014 \
+		    file://src/gui/material/font/LICENSE.txt;md5=1f319ca1887afc3591b1dccdd8530c58"
 
 SRC_URI = " \
 	git://github.com/renesas-rz/rz_benchmark_demo.git;protocol=https;branch=main \
