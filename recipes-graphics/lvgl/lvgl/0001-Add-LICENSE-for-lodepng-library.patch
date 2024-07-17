@@ -1,0 +1,41 @@
+From 756ace67b26e7ccd6aa34d712ff4c8c58c0245c9 Mon Sep 17 00:00:00 2001
+From: Yoshihito Ogawa <yoshihito.ogawa.kc@renesas.com>
+Date: Fri, 5 Jul 2024 13:44:13 +0900
+Subject: [PATCH] Add LICENSE for lodepng library
+
+Signed-off-by: Yoshihito Ogawa <yoshihito.ogawa.kc@renesas.com>
+---
+ src/extra/libs/png/LICENSE | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+ create mode 100644 src/extra/libs/png/LICENSE
+
+diff --git a/src/extra/libs/png/LICENSE b/src/extra/libs/png/LICENSE
+new file mode 100644
+index 000000000..a5fb0603d
+--- /dev/null
++++ b/src/extra/libs/png/LICENSE
+@@ -0,0 +1,21 @@
++Copyright (c) 2005-2018 Lode Vandevenne
++
++This software is provided 'as-is', without any express or implied
++warranty. In no event will the authors be held liable for any damages
++arising from the use of this software.
++
++Permission is granted to anyone to use this software for any purpose,
++including commercial applications, and to alter it and redistribute it
++freely, subject to the following restrictions:
++
++    1. The origin of this software must not be misrepresented; you must not
++    claim that you wrote the original software. If you use this software
++    in a product, an acknowledgment in the product documentation would be
++    appreciated but is not required.
++
++    2. Altered source versions must be plainly marked as such, and must not be
++    misrepresented as being the original software.
++
++    3. This notice may not be removed or altered from any source
++    distribution.
++    
+-- 
+2.25.1
+

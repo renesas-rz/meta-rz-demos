@@ -5,10 +5,14 @@
 HOMEPAGE = "https://lvgl.io/"
 DESCRIPTION = "LVGL is an OSS graphics library to create embedded GUI"
 SUMMARY = "Light and Versatile Graphics Library"
-LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENCE.txt;md5=bf1198c89ae87f043108cea62460b03a"
+LICENSE = "MIT & Zlib"
+LIC_FILES_CHKSUM = "file://LICENCE.txt;md5=bf1198c89ae87f043108cea62460b03a \
+		    file://src/extra/libs/png/LICENSE;md5=0a21ed93a5d78a5a771d718fe4a4ebc5"
 
-SRC_URI = "git://github.com/lvgl/lvgl;protocol=https;branch=release/v8.3"
+SRC_URI = " \
+	git://github.com/lvgl/lvgl;protocol=https;branch=release/v8.3 \
+	file://0001-Add-LICENSE-for-lodepng-library.patch \
+"
 SRCREV = "74d0a816a440eea53e030c4f1af842a94f7ce3d3"
 
 inherit cmake
@@ -42,6 +46,11 @@ do_configure:prepend() {
 	    -e "s|\(#define LV_USE_FS_STDIO .*\)0|\1${LVGL_CONFIG_LV_USE_FS_STDIO}|g" \
 	    -e "s|\(#define LV_FS_STDIO_LETTER .*\)\\\0|\1${LVGL_CONFIG_LV_FS_STDIO_LETTER}|g" \
 	    -e "s|\(#define LV_FS_STDIO_CACHE_SIZE *\)0|\1${LVGL_CONFIG_LV_FS_STDIO_CACHE_SIZE}|g" \
+	    \
+	    -e "s|\(#define LV_USE_PNG .*\)0|\11|g" \
+	    -e "s|\(#define LV_USE_BMP .*\)0|\11|g" \
+	    -e "s|\(#define LV_USE_SJPG .*\)0|\11|g" \
+	    -e "s|\(#define LV_USE_GIF .*\)0|\11|g" \
 	    \
             < "${S}/lv_conf_template.h" > "${S}/lv_conf.h"
 }
