@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ac55c209a96858b87de6e4b277a4a014 \
 SRC_URI = " \
 	git://github.com/renesas-rz/rz_benchmark_demo.git;protocol=https;branch=main \
 "
-SRCREV = "28be02eb066dec55823f10c1f4a1b5fdf0338212"
+SRCREV = "a413e88fbcbc30fbd23a4494bd556c529c782347"
 
 PV = "1.0+git${SRCPV}"
 
