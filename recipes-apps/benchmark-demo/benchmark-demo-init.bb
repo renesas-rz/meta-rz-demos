@@ -1,9 +1,8 @@
-SUMMARY = "Startup script and systemd service file for RZ Linux benchmark demonstration software"
+SUMMARY = "Startup script for RZ Linux benchmark demonstration software"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
 SRC_URI = " \
-	file://rz_benchmark_demo.service \
 	file://start_demo.sh \
 	file://video-dec.sh \
 	file://video-enc.sh \
@@ -14,9 +13,6 @@ SRC_URI = " \
 S = "${WORKDIR}"
 
 do_install() {
-	# Install benchmark demo systemd service
-	install -D -m 0644 ${WORKDIR}/rz_benchmark_demo.service ${D}${systemd_system_unitdir}/rz_benchmark_demo.service
-
 	# Install benchmark demo icon
 	install -D -m 0644 ${WORKDIR}/icon_benchmark_demo.png ${D}${datadir}/benchmark_demo/icon_benchmark_demo.png
 
@@ -32,7 +28,6 @@ inherit features_check systemd
 RDEPENDS_${PN} = "benchmark-demo"
 
 FILES_${PN} += " \
-	${systemd_system_unitdir}/rz_benchmark_demo.service \
 	${datadir}/benchmark_demo/start_demo.sh \
 	${datadir}/benchmark_demo/video-dec.sh \
 	${datadir}/benchmark_demo/video-enc.sh \
@@ -40,4 +35,3 @@ FILES_${PN} += " \
 	${datadir}/benchmark_demo/icon_benchmark_demo.png \
 "
 
-SYSTEMD_SERVICE_${PN} = "rz_benchmark_demo.service"

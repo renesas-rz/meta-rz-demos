@@ -1,9 +1,0 @@
-[Unit]
-Description=RZ Linux Benchmark Demo
-
-[Service]
-Type=simple
-ExecStart=/usr/share/benchmark_demo/start_demo.sh
-
-[Install]
-WantedBy=multi-user.target
