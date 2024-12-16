@@ -8,9 +8,9 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ac55c209a96858b87de6e4b277a4a014 \
 SRC_URI = " \
 	git://github.com/renesas-rz/rz_benchmark_demo.git;protocol=https;branch=main \
 "
-SRCREV = "a413e88fbcbc30fbd23a4494bd556c529c782347"
+SRCREV = "3e1dc1dcd931c7fc9592feef108c26b1246ab791"
 
-PV = "1.0+git${SRCPV}"
+PV = "1.1+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -21,7 +21,13 @@ do_install () {
 	install -D -m 0755 ${S}/rz_benchmark_demo ${D}/${bindir}/rz_benchmark_demo
 
 	# Install configuration file
-	install -D -m 0644 ${S}/config/rz_bench_config.toml ${D}${datadir}/benchmark_demo/rz_bench_config.toml
+	if [ "${MACHINE}" = "smarc-rzg2lc" ]; then
+		install -D -m 0644 ${S}/config/rz_bench_config_g2lc.toml ${D}${datadir}/benchmark_demo/rz_bench_config.toml
+	elif [ "${MACHINE}" = "smarc-rzg2ul" ]; then
+		install -D -m 0644 ${S}/config/rz_bench_config_g2ul.toml ${D}${datadir}/benchmark_demo/rz_bench_config.toml
+	else
+		install -D -m 0644 ${S}/config/rz_bench_config.toml ${D}${datadir}/benchmark_demo/rz_bench_config.toml
+	fi
 }
 
 FILES_${PN} += "/usr/share/benchmark_demo/rz_bench_config.toml"
