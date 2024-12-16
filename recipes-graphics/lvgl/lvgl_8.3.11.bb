@@ -17,6 +17,7 @@ SRC_URI = " \
 	git://github.com/lvgl/lvgl;protocol=https;branch=release/v8.3 \
 	file://0001-Add-LICENSE-for-lodepng-library.patch \
 	file://0001-docs-license-add-font-license-files-6971.patch \
+	file://0001-fix-font-remove-simsun-font.patch \
 "
 SRCREV = "74d0a816a440eea53e030c4f1af842a94f7ce3d3"
 
@@ -25,6 +26,8 @@ inherit cmake
 EXTRA_OECMAKE = "-DLIB_INSTALL_DIR=${baselib}"
 EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON"
 S = "${WORKDIR}/git"
+
+PATCHTOOL = "git"
 
 ALLOW_EMPTY:${PN} = "1"
 
