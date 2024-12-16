@@ -5,13 +5,18 @@
 HOMEPAGE = "https://lvgl.io/"
 DESCRIPTION = "LVGL is an OSS graphics library to create embedded GUI"
 SUMMARY = "Light and Versatile Graphics Library"
-LICENSE = "MIT & Zlib"
+LICENSE = "MIT & Zlib & OFL-1.1 & MIT & CC-BY-4.0"
 LIC_FILES_CHKSUM = "file://LICENCE.txt;md5=bf1198c89ae87f043108cea62460b03a \
-		    file://src/extra/libs/png/LICENSE;md5=0a21ed93a5d78a5a771d718fe4a4ebc5"
+		    file://src/extra/libs/png/LICENSE;md5=0a21ed93a5d78a5a771d718fe4a4ebc5 \
+		    file://scripts/built_in_font/font_license/DejaVuSans/LICENSE;md5=9f867da7a73fad2715291348e80d0763 \
+		    file://scripts/built_in_font/font_license/FontAwesome5/LICENSE.txt;md5=57f9201afe70f877988912a7b233de47 \
+		    file://scripts/built_in_font/font_license/Montserrat/OFL.txt;md5=b5170b54aff412cfd0bed5aa23205738 \
+"
 
 SRC_URI = " \
 	git://github.com/lvgl/lvgl;protocol=https;branch=release/v8.3 \
 	file://0001-Add-LICENSE-for-lodepng-library.patch \
+	file://0001-docs-license-add-font-license-files-6971.patch \
 "
 SRCREV = "74d0a816a440eea53e030c4f1af842a94f7ce3d3"
 
