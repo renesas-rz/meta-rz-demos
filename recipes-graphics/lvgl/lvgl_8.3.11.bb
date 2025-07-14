@@ -60,6 +60,8 @@ do_configure:prepend() {
 	    -e "s|\(#define LV_USE_SJPG .*\)0|\11|g" \
 	    -e "s|\(#define LV_USE_GIF .*\)0|\11|g" \
 	    \
+	    -e "s|\(#define LV_COLOR_SCREEN_TRANSP .*\)0|\11|g" \
+	    \
             < "${S}/lv_conf_template.h" > "${S}/lv_conf.h"
 }
 
