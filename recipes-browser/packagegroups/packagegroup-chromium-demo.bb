@@ -14,4 +14,5 @@ RDEPENDS_${PN} = "\
 	ttf-sazanami-gothic \
 	ttf-sazanami-mincho \
 	adwaita-icon-theme-cursors \
+	v4l-gst \
 "
