@@ -1,0 +1,46 @@
+From d18d3b483934878cd6fba41ad2dd979fb524d585 Mon Sep 17 00:00:00 2001
+From: liamHowatt <liamjmh0@gmail.com>
+Date: Mon, 31 Mar 2025 07:36:22 +0000
+Subject: [PATCH 2/2] fix mistake that caused tearing
+
+---
+ wayland/wayland.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/wayland/wayland.c b/wayland/wayland.c
+index 9f40ccd..acf79ac 100644
+--- a/wayland/wayland.c
++++ b/wayland/wayland.c
+@@ -1995,6 +1995,7 @@ static void _lv_wayland_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv
+         buffer->busy = true;
+         buffer->disp_waiting_flush_ready = disp_drv;
+         window->flush_pending = true;
++        return;
+     }
+ 
+     lv_disp_flush_ready(disp_drv);
+@@ -2117,6 +2118,13 @@ static void _lv_wayland_cycle(lv_timer_t * tmr)
+     _lv_wayland_handle_output();
+ }
+ 
++static void _lv_wayland_wait(lv_disp_drv_t * disp_drv)
++{
++    LV_UNUSED(disp_drv);
++    _lv_wayland_handle_input();
++    _lv_wayland_handle_output();
++}
++
+ static void _lv_wayland_pointer_read(lv_indev_drv_t *drv, lv_indev_data_t *data)
+ {
+     struct window *window = drv->disp->driver->user_data;
+@@ -2343,6 +2351,7 @@ lv_disp_t * lv_wayland_create_window(lv_coord_t hor_res, lv_coord_t ver_res, cha
+     window->lv_disp_drv.hor_res = hor_res;
+     window->lv_disp_drv.ver_res = ver_res;
+     window->lv_disp_drv.flush_cb = _lv_wayland_flush;
++    window->lv_disp_drv.wait_cb = _lv_wayland_wait;
+     window->lv_disp_drv.user_data = window;
+ 
+     /* Register display */
+-- 
+2.25.1
+

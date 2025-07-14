@@ -1,0 +1,56 @@
+From bc0f220a0e476b2227148a4e29cc5a14313476b5 Mon Sep 17 00:00:00 2001
+From: liamHowatt <liamjmh0@gmail.com>
+Date: Fri, 21 Mar 2025 16:15:57 +0100
+Subject: [PATCH 1/2] do not skip flushing
+
+---
+ wayland/wayland.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/wayland/wayland.c b/wayland/wayland.c
+index 11ed05c..9f40ccd 100644
+--- a/wayland/wayland.c
++++ b/wayland/wayland.c
+@@ -122,6 +122,7 @@ struct buffer_hdl
+     int size;
+     struct wl_buffer *wl_buffer;
+     bool busy;
++    lv_disp_drv_t * disp_waiting_flush_ready;
+ };
+ 
+ struct buffer_allocator
+@@ -1213,6 +1214,10 @@ static void handle_wl_buffer_release(void *data, struct wl_buffer *wl_buffer)
+ {
+     struct buffer_hdl *buffer_hdl = (struct buffer_hdl *)data;
+     buffer_hdl->busy = false;
++    if(buffer_hdl->disp_waiting_flush_ready) {
++        lv_disp_flush_ready(buffer_hdl->disp_waiting_flush_ready);
++        buffer_hdl->disp_waiting_flush_ready = NULL;
++    }
+ }
+ 
+ static const struct wl_buffer_listener wl_buffer_listener = {
+@@ -1950,12 +1955,6 @@ static void _lv_wayland_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv
+         lv_disp_flush_ready(disp_drv);
+         return;
+     }
+-    else if (buffer->busy)
+-    {
+-        LV_LOG_WARN("skip flush since wayland backing buffer is busy");
+-        lv_disp_flush_ready(disp_drv);
+-        return;
+-    }
+ 
+     int32_t x;
+     int32_t y;
+@@ -1994,6 +1993,7 @@ static void _lv_wayland_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv
+            wl_surface_commit(window->body->surface);
+         }
+         buffer->busy = true;
++        buffer->disp_waiting_flush_ready = disp_drv;
+         window->flush_pending = true;
+     }
+ 
+-- 
+2.25.1
+
