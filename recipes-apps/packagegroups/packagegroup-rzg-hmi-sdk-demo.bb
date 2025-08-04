@@ -16,5 +16,5 @@ RDEPENDS_${PN} = "\
 	demo-launcher \
 	lvgl-home-panel-demo \
 "
-RDEPENDS_${PN} += "${@oe.utils.conditional('MACHINE', 'smarc-rzg2lc', 'glmark2', '', d)}"
+RDEPENDS_${PN} += "${@oe.utils.conditional('MACHINE', 'smarc-rzg2lc', 'glmark2 python3 python3-py home-panel-demo', '', d)}"
 RDEPENDS_${PN} += "${@oe.utils.conditional('MACHINE', 'smarc-rzg2l', 'bigbuckbunny-sample glmark2 python3 python3-py home-panel-demo', '', d)}"

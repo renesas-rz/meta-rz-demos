@@ -11,7 +11,11 @@ SRC_URI = " \
 	git://github.com/renesas-rz/rzg_hmi_sdk.git;protocol=https;branch=main \
 	file://chromium-app.sh 	\
 "
-SRCREV = "6216927aec16893613d21d2ce2f79076f0eb71d9"
+SRCREV = "6fef486fef377082330803b3b63fa47057dd4497"
+
+SRC_URI_append_smarc-rzg2l = " \
+	file://home-panel-demo-add-a-video-playe.patch \
+"
 
 PV = "1.0+git${SRCPV}"
 
@@ -20,6 +24,8 @@ S = "${WORKDIR}/git/sample_app/chromium/home_panel_demo"
 RDEPENDS_${PN} += " bash "
 DEPENDS = "nodejs-native"
 
+PATCHTOOL = "git"
+
 do_configure() {
     cd ${S}
     npm install
@@ -27,7 +33,11 @@ do_configure() {
 
 do_compile() {
     cd ${S}
-    npm run build
+    if [ "${MACHINE}" = "smarc-rzg2lc" ]; then
+        npm run build:RZG2LC
+    else
+        npm run build
+    fi
 }
 
 do_install() {
