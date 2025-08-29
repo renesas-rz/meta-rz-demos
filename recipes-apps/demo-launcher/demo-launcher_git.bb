@@ -7,12 +7,11 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ac55c209a96858b87de6e4b277a4a014 \
 
 SRC_URI = " \
 	git://github.com/renesas-rz/rzg_hmi_sdk.git;protocol=https;branch=main \
-	file://config/* \
 	file://images/* \
 	file://demo-launcher.service \
 	file://start_demo.sh \
 "
-SRCREV = "6216927aec16893613d21d2ce2f79076f0eb71d9"
+SRCREV = "6fef486fef377082330803b3b63fa47057dd4497"
 
 PV = "1.0+git${SRCPV}"
 
@@ -22,6 +21,8 @@ inherit systemd
 
 DEPENDS += " lvgl lv-drivers tomlc99 wayland pkgconfig-native json-glib "
 TARGET_CFLAGS += "-DLV_CONF_INCLUDE_SIMPLE -I${STAGING_DIR_HOST}/usr/include/lvgl -I${STAGING_DIR_HOST}/usr/include/lvgl/lv_drivers"
+
+EXTRA_OEMAKE = "'MACHINE =${MACHINE}'"
 
 do_install () {
     install -d ${D}${bindir}
@@ -35,13 +36,7 @@ do_install () {
     install -m 0755 ${WORKDIR}/start_demo.sh ${D}${datadir}/demo-launcher/start_demo.sh
 
     # Install configuration file
-    if [ "${MACHINE}" = "smarc-rzg2l" ]; then
-        install -m 0644 ${WORKDIR}/config/lvgl_launcher_smarc-rzg2l.json ${D}${datadir}/demo-launcher/demo-launcher.json
-    elif [ "${MACHINE}" = "smarc-rzg2lc" ]; then
-        install -m 0644 ${WORKDIR}/config/lvgl_launcher_smarc-rzg2lc.json ${D}${datadir}/demo-launcher/demo-launcher.json
-    elif [ "${MACHINE}" = "smarc-rzg2ul" ]; then
-        install -m 0644 ${WORKDIR}/config/lvgl_launcher_smarc-rzg2ul.json ${D}${datadir}/demo-launcher/demo-launcher.json
-    fi
+    install -m 0644 ${S}/demo-launcher.json ${D}${datadir}/demo-launcher/demo-launcher.json
 
     # Install image files
     install -m 0644 ${WORKDIR}/images/* ${D}${datadir}/demo-launcher/images
