@@ -43,6 +43,12 @@ LVGL_CONFIG_USE_MATRIX = "${@bb.utils.contains('PACKAGECONFIG', 'thorvg', '1', '
 
 LVGL_CONFIG_USE_FLOAT = "${@bb.utils.contains('PACKAGECONFIG', 'thorvg', '1', '0', d)}"
 
+LVGL_CONFIG_LV_USE_STDLIB = "LV_STDLIB_CLIB"
+
+LVGL_CONFIG_USE_FS_STDIO = "1"
+LVGL_CONFIG_FS_STDIO_LETTER = "'L'"
+LVGL_FS_STDIO_CACHE_SIZE = "4096"
+
 DEBUG_BUILD ??= "0"
 
 ALLOW_EMPTY:${PN} = "1"
@@ -92,6 +98,14 @@ do_configure:append() {
         -e "s|^([[:space:]]*#define LV_USE_THORVG_INTERNAL[[:space:]]).*|\1${LVGL_CONFIG_USE_THORVG_INTERNAL}|" \
         -e "s|^([[:space:]]*#define LV_USE_MATRIX[[:space:]]).*|\1${LVGL_CONFIG_USE_MATRIX}|" \
         -e "s|^([[:space:]]*#define LV_USE_FLOAT[[:space:]]).*|\1${LVGL_CONFIG_USE_FLOAT}|" \
+        \
+        -e "s|^([[:space:]]*#define LV_USE_STDLIB_MALLOC[[:space:]]).*|\1${LVGL_CONFIG_LV_USE_STDLIB}|" \
+        -e "s|^([[:space:]]*#define LV_USE_STDLIB_STRING[[:space:]]).*|\1${LVGL_CONFIG_LV_USE_STDLIB}|" \
+        -e "s|^([[:space:]]*#define LV_USE_STDLIB_SPRINTF[[:space:]]).*|\1${LVGL_CONFIG_LV_USE_STDLIB}|" \
+        \
+        -e "s|^([[:space:]]*#define LV_USE_FS_STDIO[[:space:]]).*|\1${LVGL_CONFIG_USE_FS_STDIO}|" \
+        -e "s|^([[:space:]]*#define LV_FS_STDIO_LETTER[[:space:]]).*|\1${LVGL_CONFIG_FS_STDIO_LETTER}|" \
+        -e "s|^([[:space:]]*#define LV_FS_STDIO_CACHE_SIZE[[:space:]]).*|\1${LVGL_FS_STDIO_CACHE_SIZE}|" \
         \
         -e "s|^([[:space:]]*#define LV_USE_LOTTIE[[:space:]]).*|\1${LVGL_CONFIG_USE_LOTTIE}|" \
         -i "${S}/lv_conf.h"
