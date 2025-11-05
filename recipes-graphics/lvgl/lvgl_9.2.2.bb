@@ -19,6 +19,7 @@ SRC_URI = "\
 	file://0001-docs-license-add-font-license-files-6971.patch \
 	file://0001-docs-license-add-font-license-files-for-LVGL-v9.2.2.patch \
 	file://0002-fix-font-remove-three-fonts-due-to-license-issues.patch \
+	file://0001-fix-driver-fix-wayland-driver.patch \
 "
 SRCREV = "7f07a129e8d77f4984fff8e623fd5be18ff42e74"
 
