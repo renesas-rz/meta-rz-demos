@@ -49,6 +49,17 @@ LVGL_CONFIG_USE_FS_STDIO = "1"
 LVGL_CONFIG_FS_STDIO_LETTER = "'L'"
 LVGL_FS_STDIO_CACHE_SIZE = "4096"
 
+LVGL_CONFIG_USE_LODEPNG = "1"
+LVGL_CONFIG_USE_LIBPNG = "0"
+LVGL_CONFIG_USE_BMP = "1"
+LVGL_CONFIG_USE_TJPGD = "1"
+LVGL_CONFIG_USE_LIBJPEG_TURBO = "0"
+LVGL_CONFIG_USE_GIF = "1"
+LVGL_CONFIG_BIN_DECODER_RAM_LOAD = "1"
+LVGL_CONFIG_GIF_CACHE_DECODE_DATA = "0"
+LVGL_CONFIG_CACHE_DEF_SIZE = "0"
+LVGL_CONFIG_IMAGE_HEADER_CACHE_DEF_CNT = "0"
+
 DEBUG_BUILD ??= "0"
 
 ALLOW_EMPTY:${PN} = "1"
@@ -106,6 +117,17 @@ do_configure:append() {
         -e "s|^([[:space:]]*#define LV_USE_FS_STDIO[[:space:]]).*|\1${LVGL_CONFIG_USE_FS_STDIO}|" \
         -e "s|^([[:space:]]*#define LV_FS_STDIO_LETTER[[:space:]]).*|\1${LVGL_CONFIG_FS_STDIO_LETTER}|" \
         -e "s|^([[:space:]]*#define LV_FS_STDIO_CACHE_SIZE[[:space:]]).*|\1${LVGL_FS_STDIO_CACHE_SIZE}|" \
+        \
+        -e "s|^([[:space:]]*#define LV_USE_LODEPNG[[:space:]]).*|\1${LVGL_CONFIG_USE_LODEPNG}|" \
+        -e "s|^([[:space:]]*#define LV_USE_LIBPNG[[:space:]]).*|\1${LVGL_CONFIG_USE_LIBPNG}|" \
+        -e "s|^([[:space:]]*#define LV_USE_BMP[[:space:]]).*|\1${LVGL_CONFIG_USE_BMP}|" \
+        -e "s|^([[:space:]]*#define LV_USE_TJPGD[[:space:]]).*|\1${LVGL_CONFIG_USE_TJPGD}|" \
+        -e "s|^([[:space:]]*#define LV_USE_LIBJPEG_TURBO[[:space:]]).*|\1${LVGL_CONFIG_USE_LIBJPEG_TURBO}|" \
+        -e "s|^([[:space:]]*#define LV_USE_GIF[[:space:]]).*|\1${LVGL_CONFIG_USE_GIF}|" \
+        -e "s|^([[:space:]]*#define LV_BIN_DECODER_RAM_LOAD[[:space:]]).*|\1${LVGL_CONFIG_BIN_DECODER_RAM_LOAD}|" \
+        -e "s|^([[:space:]]*#define LV_GIF_CACHE_DECODE_DATA[[:space:]]).*|\1${LVGL_CONFIG_GIF_CACHE_DECODE_DATA}|" \
+        -e "s|^([[:space:]]*#define LV_CACHE_DEF_SIZE[[:space:]]).*|\1${LVGL_CONFIG_CACHE_DEF_SIZE}|" \
+        -e "s|^([[:space:]]*#define LV_IMAGE_HEADER_CACHE_DEF_CNT[[:space:]]).*|\1${LVGL_CONFIG_IMAGE_HEADER_CACHE_DEF_CNT}|" \
         \
         -e "s|^([[:space:]]*#define LV_USE_LOTTIE[[:space:]]).*|\1${LVGL_CONFIG_USE_LOTTIE}|" \
         -i "${S}/lv_conf.h"
