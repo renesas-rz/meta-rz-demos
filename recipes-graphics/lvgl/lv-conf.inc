@@ -60,6 +60,8 @@ LVGL_CONFIG_GIF_CACHE_DECODE_DATA = "0"
 LVGL_CONFIG_CACHE_DEF_SIZE = "0"
 LVGL_CONFIG_IMAGE_HEADER_CACHE_DEF_CNT = "0"
 
+LVGL_CONFIG_LINUX_FBDEV_RENDER_MODE = "LV_DISPLAY_RENDER_MODE_DIRECT"
+
 DEBUG_BUILD ??= "0"
 
 ALLOW_EMPTY:${PN} = "1"
@@ -128,6 +130,8 @@ do_configure:append() {
         -e "s|^([[:space:]]*#define LV_GIF_CACHE_DECODE_DATA[[:space:]]).*|\1${LVGL_CONFIG_GIF_CACHE_DECODE_DATA}|" \
         -e "s|^([[:space:]]*#define LV_CACHE_DEF_SIZE[[:space:]]).*|\1${LVGL_CONFIG_CACHE_DEF_SIZE}|" \
         -e "s|^([[:space:]]*#define LV_IMAGE_HEADER_CACHE_DEF_CNT[[:space:]]).*|\1${LVGL_CONFIG_IMAGE_HEADER_CACHE_DEF_CNT}|" \
+        \
+        -e "s|^([[:space:]]*#define LV_LINUX_FBDEV_RENDER_MODE[[:space:]]).*|\1${LVGL_CONFIG_LINUX_FBDEV_RENDER_MODE}|" \
         \
         -e "s|^([[:space:]]*#define LV_USE_LOTTIE[[:space:]]).*|\1${LVGL_CONFIG_USE_LOTTIE}|" \
         -i "${S}/lv_conf.h"
