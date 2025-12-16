@@ -1,10 +1,11 @@
-PACKAGECONFIG ??= "drm"
+PACKAGECONFIG ??= "wayland"
 
 PACKAGECONFIG[drm] = ",,libdrm"
 PACKAGECONFIG[fbdev] = ",,"
 PACKAGECONFIG[gridnav] = ",,"
 PACKAGECONFIG[thorvg] = ",,"
 PACKAGECONFIG[sdl] = ",,virtual/libsdl2 libsdl2-image"
+PACKAGECONFIG[wayland] = ",,libxkbcommon wayland libpng libinput wayland-protocols wayland-native pkgconfig-native"
 
 # Add libdrm include if drm is selected in PACKAGECONFIG
 TARGET_CFLAGS += "${@bb.utils.contains('PACKAGECONFIG', 'drm', '-I${STAGING_INCDIR}/libdrm', '', d)}"
@@ -16,6 +17,8 @@ LVGL_CONFIG_USE_EVDEV = "${@bb.utils.contains_any('PACKAGECONFIG', 'drm fbdev', 
 LVGL_CONFIG_USE_FBDEV = "${@bb.utils.contains('PACKAGECONFIG', 'fbdev', '1', '0', d)}"
 
 LVGL_CONFIG_USE_SDL = "${@bb.utils.contains('PACKAGECONFIG', 'sdl', '1', '0', d)}"
+
+LVGL_CONFIG_USE_WAYLAND = "${@bb.utils.contains('PACKAGECONFIG', 'wayland', '1', '0', d)}"
 
 LVGL_CONFIG_SDL_FULLSCREEN ?= "0"
 
@@ -132,6 +135,9 @@ do_configure:append() {
         -e "s|^([[:space:]]*#define LV_IMAGE_HEADER_CACHE_DEF_CNT[[:space:]]).*|\1${LVGL_CONFIG_IMAGE_HEADER_CACHE_DEF_CNT}|" \
         \
         -e "s|^([[:space:]]*#define LV_LINUX_FBDEV_RENDER_MODE[[:space:]]).*|\1${LVGL_CONFIG_LINUX_FBDEV_RENDER_MODE}|" \
+        \
+        -e "s|^([[:space:]]*#define LV_USE_WAYLAND[[:space:]]).*|\1${LVGL_CONFIG_USE_WAYLAND}|" \
+        -e "s|^([[:space:]]*#define LV_WAYLAND_WINDOW_DECORATIONS[[:space:]]).*|\1${LVGL_CONFIG_USE_WAYLAND}|" \
         \
         -e "s|^([[:space:]]*#define LV_USE_LOTTIE[[:space:]]).*|\1${LVGL_CONFIG_USE_LOTTIE}|" \
         -i "${S}/lv_conf.h"

@@ -23,6 +23,16 @@ SRC_URI = "\
 "
 SRCREV = "7f07a129e8d77f4984fff8e623fd5be18ff42e74"
 
+SRC_URI:append:smarc-rzg2l = " \
+	file://0001-fix-env_support-cmake-add-build-configuration-for-wa.patch \
+"
+SRC_URI:append:smarc-rzg2lc = " \
+	file://0001-fix-env_support-cmake-add-build-configuration-for-wa.patch \
+"
+SRC_URI:append:smarc-rzg3e = " \
+	file://0001-fix-env_support-cmake-add-build-configuration-for-wa.patch \
+"
+
 inherit cmake
 
 EXTRA_OECMAKE = "-DLIB_INSTALL_DIR=${baselib} -DBUILD_SHARED_LIBS=ON"

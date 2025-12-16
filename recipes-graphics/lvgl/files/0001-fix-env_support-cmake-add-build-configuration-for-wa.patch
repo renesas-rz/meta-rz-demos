@@ -1,0 +1,62 @@
+From 899335ec7ad7a00d9698ae96050e39bb60085f34 Mon Sep 17 00:00:00 2001
+From: Yoshihito Ogawa <yoshihito.ogawa.kc@renesas.com>
+Date: Tue, 4 Nov 2025 17:12:26 +0900
+Subject: [PATCH] fix(env_support/cmake): add build configuration for wayland
+
+Signed-off-by: Yoshihito Ogawa <yoshihito.ogawa.kc@renesas.com>
+---
+ env_support/cmake/custom.cmake | 41 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 41 insertions(+)
+
+diff --git a/env_support/cmake/custom.cmake b/env_support/cmake/custom.cmake
+index e4cd36376..af33a1cd5 100644
+--- a/env_support/cmake/custom.cmake
++++ b/env_support/cmake/custom.cmake
+@@ -216,3 +216,44 @@ if(NOT LV_CONF_BUILD_DISABLE_EXAMPLES)
+     RUNTIME DESTINATION "${RUNTIME_INSTALL_DIR}"
+     PUBLIC_HEADER DESTINATION "${INC_INSTALL_DIR}")
+ endif()
++
++# Find wayland-scanner
++find_program(WAYLAND_SCANNER_EXECUTABLE wayland-scanner REQUIRED)
++
++# Find wayland-protocols
++find_package(PkgConfig)
++pkg_check_modules(WAYLAND_PROTOCOLS REQUIRED wayland-protocols)
++pkg_get_variable(WAYLAND_PROTOCOLS_PKGDATADIR wayland-protocols pkgdatadir)
++
++# Set a path to xdg-shell.xml
++set(XDG_SHELL_XML_PATH
++ "${WAYLAND_PROTOCOLS_PKGDATADIR}/stable/xdg-shell/xdg-shell.xml"
++  CACHE FILEPATH "Path to the xdg-shell.xml protocol definition")
++
++# Set paths to generated files
++set(XDG_SHELL_HEADER "${LVGL_ROOT_DIR}/src/drivers/wayland/wayland_xdg_shell.h")
++set(XDG_SHELL_CODE   "${LVGL_ROOT_DIR}/src/drivers/wayland/wayland_xdg_shell.c")
++
++# Generate a client header
++add_custom_command(
++  OUTPUT ${XDG_SHELL_HEADER}
++  COMMAND ${WAYLAND_SCANNER_EXECUTABLE} client-header ${XDG_SHELL_XML_PATH} ${XDG_SHELL_HEADER}
++  DEPENDS ${XDG_SHELL_XML_PATH}
++  COMMENT "Generating wayland_xdg_shell.h"
++)
++
++# Generate code
++add_custom_command(
++  OUTPUT ${XDG_SHELL_CODE}
++  COMMAND ${WAYLAND_SCANNER_EXECUTABLE} private-code ${XDG_SHELL_XML_PATH} ${XDG_SHELL_CODE}
++  DEPENDS ${XDG_SHELL_XML_PATH}
++  COMMENT "Generating wayland_xdg_shell.c"
++)
++
++# Mark files with the GENERATED property
++set_source_files_properties(${XDG_SHELL_HEADER} ${XDG_SHELL_CODE} PROPERTIES GENERATED TRUE)
++
++# Build a static library for the generated files
++add_library(lv_xdg_shell STATIC ${XDG_SHELL_HEADER} ${XDG_SHELL_CODE})
++
++target_link_libraries(lvgl PRIVATE lv_xdg_shell)
+-- 
+2.34.1
+
