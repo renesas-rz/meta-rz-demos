@@ -1,0 +1,35 @@
+From b62d91853e9d52a16462bbeeef3f14f2224efe3c Mon Sep 17 00:00:00 2001
+From: Yoshihito Ogawa <yoshihito.ogawa.kc@renesas.com>
+Date: Thu, 22 Jan 2026 19:43:27 +0900
+Subject: [PATCH 5/6] workaround: home-panel-demo: disable fullscreen mode on
+ the movie player
+
+An issue was identified in the movie player in
+which operating the seek bar during playback
+leads to a playback malfunction.
+Because seek bar functionality cannot be easily
+disabled in fullscreen mode, fullscreen mode has
+been disabled as a temporary workaround until
+the problem is resolved.
+
+Signed-off-by: Yoshihito Ogawa <yoshihito.ogawa.kc@renesas.com>
+---
+ .../home_panel_demo/src/components/video-player/video-player.js | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/sample_app/chromium/home_panel_demo/src/components/video-player/video-player.js b/sample_app/chromium/home_panel_demo/src/components/video-player/video-player.js
+index a32b2e1..7b403f4 100644
+--- a/sample_app/chromium/home_panel_demo/src/components/video-player/video-player.js
++++ b/sample_app/chromium/home_panel_demo/src/components/video-player/video-player.js
+@@ -43,7 +43,7 @@ export class VideoPlayer extends LitElement {
+           </div>
+         </div>
+         <div class="transparentframe"></div>
+-        <video controls id="big-video" src=${this.videoSrcs[0]}></video>
++        <video controls controlsList="nofullscreen" id="big-video" src=${this.videoSrcs[0]}></video>
+       </main>
+     `;
+   }
+-- 
+2.34.1
+

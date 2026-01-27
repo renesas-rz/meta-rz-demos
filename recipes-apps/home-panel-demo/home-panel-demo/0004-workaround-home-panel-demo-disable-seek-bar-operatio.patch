@@ -1,0 +1,55 @@
+From 1b69dbbfb8fdf425dc5449fce0ddec86daa36a87 Mon Sep 17 00:00:00 2001
+From: Yoshihito Ogawa <yoshihito.ogawa.kc@renesas.com>
+Date: Thu, 22 Jan 2026 19:37:46 +0900
+Subject: [PATCH 4/6] workaround: home-panel-demo: disable seek bar operation
+ on the movie player
+
+An issue was found in the movie player in which
+operating the seek bar during playback leads to
+playback malfunction. As a temporary workaround,
+seek bar functionality has been disabled until
+the problem is resolved.
+
+Signed-off-by: Yoshihito Ogawa <yoshihito.ogawa.kc@renesas.com>
+---
+ .../src/components/video-player/video-player.js | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+
+diff --git a/sample_app/chromium/home_panel_demo/src/components/video-player/video-player.js b/sample_app/chromium/home_panel_demo/src/components/video-player/video-player.js
+index 1b17a5c..a32b2e1 100644
+--- a/sample_app/chromium/home_panel_demo/src/components/video-player/video-player.js
++++ b/sample_app/chromium/home_panel_demo/src/components/video-player/video-player.js
+@@ -42,6 +42,7 @@ export class VideoPlayer extends LitElement {
+             <img src=${this.imgSrcs[2]} />
+           </div>
+         </div>
++        <div class="transparentframe"></div>
+         <video controls id="big-video" src=${this.videoSrcs[0]}></video>
+       </main>
+     `;
+@@ -91,6 +92,22 @@ export class VideoPlayer extends LitElement {
+       width: 870px;
+       height: 500px;
+     }
++    .transparentframe {
++      padding: 10px;
++      margin-bottom: 90px;
++      margin-top: 470px;
++      margin-left: 240px;
++      border: 1px solid #333333;
++      position: absolute;
++      z-index: 2;
++      width: 820px;
++      opacity: 0;
++    }
++
++    #big-video {
++      position: relative;
++      z-index: 1;
++    }
+   `;
+ }
+ 
+-- 
+2.34.1
+
