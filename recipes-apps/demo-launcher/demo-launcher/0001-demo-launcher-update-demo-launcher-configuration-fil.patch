@@ -1,0 +1,44 @@
+From bb61d5b634ce63df1724ebbffe0f5f46ceaa7bb8 Mon Sep 17 00:00:00 2001
+From: Yoshihito Ogawa <yoshihito.ogawa.kc@renesas.com>
+Date: Fri, 23 Jan 2026 19:51:07 +0900
+Subject: [PATCH] demo-launcher: update demo launcher configuration file for
+ RZ/G3E
+
+Signed-off-by: Yoshihito Ogawa <yoshihito.ogawa.kc@renesas.com>
+---
+ .../config/lvgl_launcher_smarc-rzg3e.json     | 20 +++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+
+diff --git a/sample_app/lvgl/lvgl_demo_launcher/config/lvgl_launcher_smarc-rzg3e.json b/sample_app/lvgl/lvgl_demo_launcher/config/lvgl_launcher_smarc-rzg3e.json
+index e703657..bb01bf9 100644
+--- a/sample_app/lvgl/lvgl_demo_launcher/config/lvgl_launcher_smarc-rzg3e.json
++++ b/sample_app/lvgl/lvgl_demo_launcher/config/lvgl_launcher_smarc-rzg3e.json
+@@ -8,5 +8,25 @@
+     "exe_cmd": "/usr/bin/lvgl-home-panel-demo",
+     "icon_image": "L:/usr/share/demo-launcher/images/LVGL-Logo.png",
+     "description": "LVGL Home panel demo"
++  },
++  {
++    "exe_cmd": "/usr/share/chromium_demo/chromium-app.sh",
++    "icon_image": "L:/usr/share/demo-launcher/images/Chromium_Logo.png",
++    "description": "Chromium Home panel demo"
++  },
++  {
++    "exe_cmd": "/usr/share/demo-launcher/flutter_material3_demo.sh",
++    "icon_image": "",
++    "description": "Flutter material3 demo"
++  },
++  {
++    "exe_cmd": "/usr/share/demo-launcher/flutter_animation_demo.sh",
++    "icon_image": "",
++    "description": "Flutter animation demo"
++  },
++  {
++    "exe_cmd": "/usr/share/demo-launcher/flutter_deeplink_store_demo.sh",
++    "icon_image": "",
++    "description": "Flutter shopping demo"
+   }
+ ]
+-- 
+2.34.1
+
