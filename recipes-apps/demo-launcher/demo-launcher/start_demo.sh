@@ -6,11 +6,7 @@ if [ "smarc-rzg2ul" != ${MACHINE_NAME} ]; then
 
     if [ -z $XDG_RUNTIME_DIR ]
     then
-        if [ "smarc-rzg3e" = ${MACHINE_NAME} ]; then
-            export XDG_RUNTIME_DIR=/run/user/992
-        else
-            export XDG_RUNTIME_DIR=/run/user/996
-        fi
+        export XDG_RUNTIME_DIR=/run/user/992
     fi
     export WAYLAND_DISPLAY=wayland-1
 
@@ -27,4 +23,5 @@ if [ "smarc-rzg2ul" != ${MACHINE_NAME} ]; then
     done
 fi
 
+/etc/profile.d/audio.sh
 /usr/bin/demo-launcher
