@@ -1,4 +1,6 @@
 PACKAGECONFIG ??= "wayland"
+PACKAGECONFIG:remove:smarc-rzg2ul = "wayland"
+PACKAGECONFIG:append:smarc-rzg2ul = " fbdev"
 
 PACKAGECONFIG[drm] = ",,libdrm"
 PACKAGECONFIG[fbdev] = ",,"
