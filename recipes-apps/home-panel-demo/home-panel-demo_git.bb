@@ -21,6 +21,26 @@ SRCREV = "06c653cd004f61d6558b2e03a7ca8dff0d72e143"
 
 PV = "2.0+git${SRCPV}"
 
+SRC_URI:remove:smarc-rzg2l = " \
+	file://0002-home-panel-demo-replace-a-h.264-video-file-with-a-h..patch \
+	file://0006-home-panel-demo-bump-to-version-2.00.patch \
+"
+SRC_URI:append:smarc-rzg2l = " \
+	file://0001-home-panel-demo-bump-to-version-2.01-for-RZ-G2L.patch \
+"
+SRC_URI:remove:smarc-rzg2lc = " \
+	file://0001-home-panel-demo-add-a-video-player-to-Chromium-home-.patch \
+	file://0002-home-panel-demo-replace-a-h.264-video-file-with-a-h..patch \
+	file://0003-workaround-home-panel-demo-disable-the-music-player.patch \
+	file://0004-workaround-home-panel-demo-disable-seek-bar-operatio.patch \
+	file://0005-workaround-home-panel-demo-disable-fullscreen-mode-o.patch \
+	file://0006-home-panel-demo-bump-to-version-2.00.patch \
+"
+SRC_URI:append:smarc-rzg2lc = " \
+	file://0001-home-panel-demo-disable-the-music-player-for-RZ-G2LC.patch \
+	file://0002-home-panel-demo-bump-to-version-2.01-for-RZ-G2LC.patch \
+"
+
 S = "${WORKDIR}/git/sample_app/chromium/home_panel_demo"
 
 RDEPENDS:${PN} += " bash "

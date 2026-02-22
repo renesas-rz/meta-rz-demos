@@ -1,0 +1,52 @@
+From 2063ee5dd26c9cc620bf0a24a0d7f381b0d0a0bc Mon Sep 17 00:00:00 2001
+From: Yoshihito Ogawa <yoshihito.ogawa.kc@renesas.com>
+Date: Sun, 22 Feb 2026 18:15:48 +0900
+Subject: [PATCH 1/2] home-panel-demo: disable the music player for RZ/G2LC
+
+Signed-off-by: Yoshihito Ogawa <yoshihito.ogawa.kc@renesas.com>
+---
+ .../chromium/home_panel_demo/src/pages/dashboard.js | 13 ++++---------
+ 1 file changed, 4 insertions(+), 9 deletions(-)
+
+diff --git a/sample_app/chromium/home_panel_demo/src/pages/dashboard.js b/sample_app/chromium/home_panel_demo/src/pages/dashboard.js
+index 52fa8af..343aa67 100644
+--- a/sample_app/chromium/home_panel_demo/src/pages/dashboard.js
++++ b/sample_app/chromium/home_panel_demo/src/pages/dashboard.js
+@@ -11,7 +11,6 @@ export class DashboardPage extends LitElement {
+   render() {
+     return html`
+       <div class="container">
+-        <music-widget class="music-player" title="Music Player"></music-widget>
+         <icon-widget
+           class="image-gallery"
+           title="Image Gallery"
+@@ -294,22 +293,18 @@ export class DashboardPage extends LitElement {
+       height: 80%;
+       transition: all 500ms ease;
+     }
+-    .music-player {
+-      grid-column: 1 / span 4;
+-      grid-row: 1 / span 2;      
+-    }
+     .image-gallery {
+-      grid-column: 5 / span 4;
++      grid-column: 4 / span 3;
+     }
+     .home-automation {
+-      grid-column: 9 / span 4;
++      grid-column: 7 / span 3;
+     }
+     .weather-info {
+-      grid-column: 5 / span 5;
++      grid-column: 4 / span 4;
+       grid-row: 2;
+     } 
+     .camera {
+-      grid-column: 10 / span 3;
++      grid-column: 8 / span 2;
+       grid-row: 2;
+     }
+ 
+-- 
+2.34.1
+

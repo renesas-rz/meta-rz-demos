@@ -1,0 +1,44 @@
+From 708c9b84d2f216f74a9332b10566d0d7f0e90cb5 Mon Sep 17 00:00:00 2001
+From: Yoshihito Ogawa <yoshihito.ogawa.kc@renesas.com>
+Date: Sun, 22 Feb 2026 18:11:40 +0900
+Subject: [PATCH] home-panel-demo: bump to version 2.01 for RZ/G2L
+
+Signed-off-by: Yoshihito Ogawa <yoshihito.ogawa.kc@renesas.com>
+---
+ sample_app/chromium/home_panel_demo/LICENSE.txt    | 4 ++--
+ sample_app/chromium/home_panel_demo/vite.config.js | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/sample_app/chromium/home_panel_demo/LICENSE.txt b/sample_app/chromium/home_panel_demo/LICENSE.txt
+index 7b24860..5988f22 100644
+--- a/sample_app/chromium/home_panel_demo/LICENSE.txt
++++ b/sample_app/chromium/home_panel_demo/LICENSE.txt
+@@ -1,9 +1,9 @@
+ MIT License
+ 
+-Copyright (c) 2024 Renesas Electronics Corp. All rights reserved.
++Copyright (c) 2024, 2026 Renesas Electronics Corp. All rights reserved.
+ 
+ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ 
+ The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ 
+-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+\ No newline at end of file
++THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+diff --git a/sample_app/chromium/home_panel_demo/vite.config.js b/sample_app/chromium/home_panel_demo/vite.config.js
+index 398b4f1..67a852d 100644
+--- a/sample_app/chromium/home_panel_demo/vite.config.js
++++ b/sample_app/chromium/home_panel_demo/vite.config.js
+@@ -24,7 +24,7 @@ export default ({ mode }) => {
+ 
+     // Set the application version/
+     // the package version is defined in the package.json
+-    __APP_VERSION__: JSON.stringify("1.01"),
++    __APP_VERSION__: JSON.stringify("2.01"),
+   },
+ });
+ };
+-- 
+2.34.1
+
