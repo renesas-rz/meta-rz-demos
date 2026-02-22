@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a6f7398c4a545ebdc0f09e23a6127abd \
 
 SRC_URI = " \
 	git://github.com/renesas-rz/rzg_hmi_sdk.git;protocol=https;branch=main \
-	file://0001-demo-launcher-update-demo-launcher-configuration-fil.patch \
 	file://images/ \
 	file://demo-launcher.service \
 	file://start_demo.sh \
@@ -15,7 +14,7 @@ SRC_URI = " \
 	file://flutter_animation_demo.sh \
 	file://flutter_deeplink_store_demo.sh \
 "
-SRCREV = "89ed5c17cae206f3614e3cc206d16189824cca0f"
+SRCREV = "06c653cd004f61d6558b2e03a7ca8dff0d72e143"
 
 PV = "2.0+git${SRCPV}"
 
