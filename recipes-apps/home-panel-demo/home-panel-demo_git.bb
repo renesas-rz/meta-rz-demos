@@ -17,7 +17,7 @@ SRC_URI = " \
 	file://0005-workaround-home-panel-demo-disable-fullscreen-mode-o.patch \
 	file://0006-home-panel-demo-bump-to-version-2.00.patch \
 "
-SRCREV = "89ed5c17cae206f3614e3cc206d16189824cca0f"
+SRCREV = "06c653cd004f61d6558b2e03a7ca8dff0d72e143"
 
 PV = "2.0+git${SRCPV}"
 
