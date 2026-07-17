@@ -4,9 +4,9 @@ MACHINE_NAME=`hostname`
 
 if [ "smarc-rzg2ul" != ${MACHINE_NAME} ]; then
 
-    if [ -z $XDG_RUNTIME_DIR ]
+    if [ -z "$XDG_RUNTIME_DIR" ]
     then
-        export XDG_RUNTIME_DIR=/run/user/992
+        export XDG_RUNTIME_DIR=/run/user/$(id -u weston)
     fi
     export WAYLAND_DISPLAY=wayland-1
 
@@ -17,7 +17,7 @@ if [ "smarc-rzg2ul" != ${MACHINE_NAME} ]; then
     fi
 
     # Wait for weston to start
-    while [ ! -e $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY ]
+    while [ ! -e "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY" ]
     do
     	usleep 10000
     done
