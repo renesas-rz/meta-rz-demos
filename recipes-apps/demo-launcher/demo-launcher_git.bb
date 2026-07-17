@@ -13,6 +13,7 @@ SRC_URI = " \
 	file://flutter_material3_demo.sh \
 	file://flutter_animation_demo.sh \
 	file://flutter_deeplink_store_demo.sh \
+	file://icon_demo-launcher.png \
 "
 SRCREV = "06c653cd004f61d6558b2e03a7ca8dff0d72e143"
 
@@ -42,6 +43,7 @@ do_install () {
     install -m 0755 ${WORKDIR}/flutter_material3_demo.sh ${D}${datadir}/demo-launcher/flutter_material3_demo.sh
     install -m 0755 ${WORKDIR}/flutter_animation_demo.sh ${D}${datadir}/demo-launcher/flutter_animation_demo.sh
     install -m 0755 ${WORKDIR}/flutter_deeplink_store_demo.sh ${D}${datadir}/demo-launcher/flutter_deeplink_store_demo.sh
+    install -m 0644 ${WORKDIR}/icon_demo-launcher.png ${D}${datadir}/demo-launcher/icon_demo-launcher.png
 
     # Install configuration file
     install -m 0644 ${S}/demo-launcher.json ${D}${datadir}/demo-launcher/demo-launcher.json
