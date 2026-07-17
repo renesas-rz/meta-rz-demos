@@ -10,8 +10,6 @@ PACKAGES = "\
 "
 
 RDEPENDS:${PN} = "\
-	benchmark-demo \
-	benchmark-demo-init \
 	demo-launcher \
 	lvgl-home-panel-demo \
 "
