@@ -1,0 +1,42 @@
+From 91396c1b30380dc309e9a585ee7fe9be4a88a465 Mon Sep 17 00:00:00 2001
+From: Loc Pham <loc.pham.xh@renesas.com>
+Date: Wed, 15 Jan 2025 16:58:41 +0700
+Subject: [PATCH] Fix error at do_configure step
+
+Without this patch, the flutter-video-player-plugin recipe will meet an error as below:
+
+  | -- Checking for module 'wayland-egl>=1.16.0'
+  | --   Requested 'wayland-egl >= 1.16.0' but version of wayland-egl is 1.0.0
+  | CMake Error at .../flutter-video-player-plugin/git/recipe-sysroot-native/\
+  |                usr/share/cmake-3.28/Modules/FindPkgConfig.cmake:619 (message):
+  |   The following required packages were not found:
+  |    - wayland-egl>=1.16.0
+
+The recipe requires wayland-egl's version must not be lower than 1.16.0.
+However, in this case, it's 1.0.0 and the step failed to run successfully.
+
+Root cause: Initially, the version of wayland-egl is actually 1.22.0.
+However, the package is removed by wayland_%d.bbappend and mali-library*.bb
+recipes replace it with another wayland-egl package whose version is 1.0.0.
+
+For workaround, this commit changes the version requirement of wayland-egl from
+1.16.0 to 1.0.0.
+
+Signed-off-by: Loc Pham <loc.pham.xh@renesas.com>
+
+diff --git a/cmake/package.cmake b/cmake/package.cmake
+index 7a2ebca..dbf22be 100644
+--- a/cmake/package.cmake
++++ b/cmake/package.cmake
+@@ -36,7 +36,7 @@ else()
+   pkg_check_modules(WAYLAND_PROTOCOLS REQUIRED wayland-protocols)
+   pkg_check_modules(WAYLAND_CLIENT REQUIRED wayland-client>=1.16.0)
+   pkg_check_modules(WAYLAND_CURSOR REQUIRED wayland-cursor>=1.16.0)
+-  pkg_check_modules(WAYLAND_EGL REQUIRED wayland-egl>=1.16.0)
++  pkg_check_modules(WAYLAND_EGL REQUIRED wayland-egl>=1.0.0)
+ endif()
+ 
+ # requires for supporting external texture plugin.
+-- 
+2.34.1
+
