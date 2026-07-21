@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9da82885c90b317db044f6bfba5652db"
 SRC_URI = " \
 	git://github.com/renesas-rz/rzg_hmi_sdk.git;protocol=https;branch=main \
 "
-SRCREV = "25511594765b4e924ccc901cb3c865a233d6393f"
+SRCREV = "d55825b3719309d868977a7cc3f0b329750664a2"
 
 PV = "2.0+git${SRCPV}"
 
