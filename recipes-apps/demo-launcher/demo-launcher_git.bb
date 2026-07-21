@@ -15,7 +15,7 @@ SRC_URI = " \
 	file://flutter_deeplink_store_demo.sh \
 	file://icon_demo-launcher.png \
 "
-SRCREV = "06c653cd004f61d6558b2e03a7ca8dff0d72e143"
+SRCREV = "d55825b3719309d868977a7cc3f0b329750664a2"
 
 PV = "2.0+git${SRCPV}"
 
