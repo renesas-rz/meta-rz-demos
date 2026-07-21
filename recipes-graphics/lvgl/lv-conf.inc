@@ -67,6 +67,10 @@ LVGL_CONFIG_IMAGE_HEADER_CACHE_DEF_CNT = "0"
 
 LVGL_CONFIG_LINUX_FBDEV_RENDER_MODE = "LV_DISPLAY_RENDER_MODE_DIRECT"
 
+LVGL_CONFIG_FONT_MONTSERRAT_12 = "1"
+LVGL_CONFIG_FONT_MONTSERRAT_10 = "1"
+LVGL_CONFIG_FONT_MONTSERRAT_8 = "1"
+
 DEBUG_BUILD ??= "0"
 
 ALLOW_EMPTY:${PN} = "1"
@@ -142,5 +146,10 @@ do_configure:append() {
         -e "s|^([[:space:]]*#define LV_WAYLAND_WINDOW_DECORATIONS[[:space:]]).*|\1${LVGL_CONFIG_USE_WAYLAND}|" \
         \
         -e "s|^([[:space:]]*#define LV_USE_LOTTIE[[:space:]]).*|\1${LVGL_CONFIG_USE_LOTTIE}|" \
+        \
+        -e "s|^([[:space:]]*#define LV_FONT_MONTSERRAT_12[[:space:]]).*|\1${LVGL_CONFIG_FONT_MONTSERRAT_12}|" \
+        -e "s|^([[:space:]]*#define LV_FONT_MONTSERRAT_10[[:space:]]).*|\1${LVGL_CONFIG_FONT_MONTSERRAT_10}|" \
+        -e "s|^([[:space:]]*#define LV_FONT_MONTSERRAT_8[[:space:]]).*|\1${LVGL_CONFIG_FONT_MONTSERRAT_8}|" \
+        \
         -i "${S}/lv_conf.h"
 }
