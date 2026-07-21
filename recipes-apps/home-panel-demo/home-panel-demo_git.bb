@@ -10,36 +10,10 @@ PR = "r0"
 SRC_URI = " \
 	git://github.com/renesas-rz/rzg_hmi_sdk.git;protocol=https;branch=main \
 	file://chromium-app.sh 	\
-	file://0001-home-panel-demo-add-a-video-player-to-Chromium-home-.patch \
-	file://0002-home-panel-demo-replace-a-h.264-video-file-with-a-h..patch \
-	file://0003-workaround-home-panel-demo-disable-the-music-player.patch \
-	file://0004-workaround-home-panel-demo-disable-seek-bar-operatio.patch \
-	file://0005-workaround-home-panel-demo-disable-fullscreen-mode-o.patch \
-	file://0006-home-panel-demo-bump-to-version-2.00.patch \
 "
-SRCREV = "06c653cd004f61d6558b2e03a7ca8dff0d72e143"
+SRCREV = "d55825b3719309d868977a7cc3f0b329750664a2"
 
 PV = "2.0+git${SRCPV}"
-
-SRC_URI:remove:smarc-rzg2l = " \
-	file://0002-home-panel-demo-replace-a-h.264-video-file-with-a-h..patch \
-	file://0006-home-panel-demo-bump-to-version-2.00.patch \
-"
-SRC_URI:append:smarc-rzg2l = " \
-	file://0001-home-panel-demo-bump-to-version-2.01-for-RZ-G2L.patch \
-"
-SRC_URI:remove:smarc-rzg2lc = " \
-	file://0001-home-panel-demo-add-a-video-player-to-Chromium-home-.patch \
-	file://0002-home-panel-demo-replace-a-h.264-video-file-with-a-h..patch \
-	file://0003-workaround-home-panel-demo-disable-the-music-player.patch \
-	file://0004-workaround-home-panel-demo-disable-seek-bar-operatio.patch \
-	file://0005-workaround-home-panel-demo-disable-fullscreen-mode-o.patch \
-	file://0006-home-panel-demo-bump-to-version-2.00.patch \
-"
-SRC_URI:append:smarc-rzg2lc = " \
-	file://0001-home-panel-demo-disable-the-music-player-for-RZ-G2LC.patch \
-	file://0002-home-panel-demo-bump-to-version-2.01-for-RZ-G2LC.patch \
-"
 
 S = "${WORKDIR}/git/sample_app/chromium/home_panel_demo"
 
@@ -57,6 +31,8 @@ do_compile() {
     cd ${S}
     if [ "${MACHINE}" = "smarc-rzg2lc" ]; then
         npm run build:RZG2LC
+    elif [ "${MACHINE}" = "smarc-rzg3e" ]; then
+        npm run build:RZG3E
     else
         npm run build
     fi
