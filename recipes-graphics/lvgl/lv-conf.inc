@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: Axis Communication AB <https://www.axis.com/>
 # SPDX-License-Identifier: MIT
 
-DEPENDS += "python3-kconfiglib-native python3-pcpp-native"
+DEPENDS += "python3-kconfiglib-native python3-pcpp-native mali-library"
 
 SRC_URI += " \
     file://defconfig \
@@ -12,9 +12,14 @@ SRC_URI += " \
     ${@bb.utils.contains('PACKAGECONFIG', 'gridnav', 'file://gridnav.cfg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'sdl', 'file://sdl.cfg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'thorvg', 'file://thorvg.cfg', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'wayland', 'file://wayland.cfg', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'gpu', 'file://gpu.cfg', '', d)} \
 "
 
-PACKAGECONFIG ??= "drm"
+PACKAGECONFIG ??= "wayland"
+
+PACKAGECONFIG:remove:smarc-rzg2ul = "wayland"
+PACKAGECONFIG:append:smarc-rzg2ul = " fbdev"
 
 PACKAGECONFIG[drm] = ",,libdrm libevdev"
 PACKAGECONFIG[fbdev] = ",,libevdev"
@@ -22,15 +27,19 @@ PACKAGECONFIG[freetype] = ",,freetype"
 PACKAGECONFIG[gridnav] = ",,"
 PACKAGECONFIG[thorvg] = ",,"
 PACKAGECONFIG[sdl] = ",,virtual/libsdl2 libsdl2-image"
+PACKAGECONFIG[wayland] = ",,libxkbcommon wayland-native libpng libinput wayland-protocols pkgconfig-native"
+PACKAGECONFIG[gpu] = ",,libdrm libevdev"
 
 inherit cml1 python3native
 
 EXTRA_OECMAKE += "-DLV_BUILD_USE_KCONFIG=ON"
 
 LVGL_FLAGS += " \
-    ${@bb.utils.contains('PACKAGECONFIG', 'drm', '-I${STAGING_INCDIR}/libdrm', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'drm', '-I${STAGING_INCDIR}/libdrm ', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'freetype', '-I${STAGING_INCDIR}/freetype2', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'gpu', '-I${STAGING_INCDIR}/libdrm', '', d)} \
 "
+
 CFLAGS += "${LVGL_FLAGS}"
 CXXFLAGS += "${LVGL_FLAGS}"
 
@@ -40,7 +49,7 @@ export KCONFIG_CONFIG ?= "${KCONFIG_CONFIG_ROOTDIR}/.config"
 KCONFIG_CONFIG_COMMAND ?= "menuconfig ${KCONFIG_FILE}"
 
 do_configure() {
-    cat ${UNPACKDIR}/defconfig ${@" ".join(find_cfgs(d))} > ${B}/defconfig
+    cat ${WORKDIR}/defconfig ${@" ".join(find_cfgs(d))} > ${B}/defconfig
     defconfig --kconfig ${KCONFIG_FILE} ${B}/defconfig
 
     cmake_do_configure
