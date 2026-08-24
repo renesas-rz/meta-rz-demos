@@ -16,3 +16,4 @@ RDEPENDS:${PN} = "\
 RDEPENDS:${PN} += "${@oe.utils.conditional('MACHINE', 'smarc-rzg2lc', 'python3 python3-py home-panel-demo', '', d)}"
 RDEPENDS:${PN} += "${@oe.utils.conditional('MACHINE', 'smarc-rzg2l', 'bigbuckbunny-sample python3 python3-py home-panel-demo', '', d)}"
 RDEPENDS:${PN} += "${@oe.utils.conditional('MACHINE', 'smarc-rzg3e', 'bigbuckbunny-sample python3 python3-py home-panel-demo', '', d)}"
+RDEPENDS:${PN} += "${@oe.utils.conditional('MACHINE', 'smarc-rzg3l', 'bigbuckbunny-sample python3 python3-py home-panel-demo', '', d)}"
