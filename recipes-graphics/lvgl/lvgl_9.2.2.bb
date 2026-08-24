@@ -32,6 +32,9 @@ SRC_URI:append:smarc-rzg2lc = " \
 SRC_URI:append:smarc-rzg3e = " \
 	file://0001-fix-env_support-cmake-add-build-configuration-for-wa.patch \
 "
+SRC_URI:append:smarc-rzg3l = " \
+	file://0001-fix-env_support-cmake-add-build-configuration-for-wa.patch \
+"
 
 inherit cmake
 
