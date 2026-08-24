@@ -13,8 +13,24 @@ SRC_URI = "git://github.com/lvgl/lvgl;protocol=https;branch=release/v9.5;tag=v9.
 
 SRCREV = "85aa60d18b3d5e5588d7b247abf90198f07c8a63"
 
+SRC_URI:append:smarc-rzg2l = " \
+    file://0001-fix-env_support-cmake-add-build-configuration-for-wa.patch \
+"
+SRC_URI:append:smarc-rzg2lc = " \
+    file://0001-fix-env_support-cmake-add-build-configuration-for-wa.patch \
+"
+SRC_URI:append:smarc-rzg3e = " \
+    file://0001-fix-env_support-cmake-add-build-configuration-for-wa.patch \
+"
+SRC_URI:append:smarc-rzg3l = " \
+    file://0001-fix-env_support-cmake-add-build-configuration-for-wa.patch \
+"
+
 inherit cmake
 
 EXTRA_OECMAKE += "-DLIB_INSTALL_DIR=${baselib} -DBUILD_SHARED_LIBS=ON"
+S = "${WORKDIR}/git"
+
+PATCHTOOL = "git"
 
 require lv-conf.inc
