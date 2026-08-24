@@ -20,3 +20,4 @@ RDEPENDS:${PN} = "\
 RDEPENDS:${PN} += "${@oe.utils.conditional('MACHINE', 'smarc-rzg2lc', 'glmark2', '', d)}"
 RDEPENDS:${PN} += "${@oe.utils.conditional('MACHINE', 'smarc-rzg2l', 'glmark2', '', d)}"
 RDEPENDS:${PN} += "${@oe.utils.conditional('MACHINE', 'smarc-rzg3e', 'glmark2', '', d)}"
+RDEPENDS:${PN} += "${@oe.utils.conditional('MACHINE', 'smarc-rzg3l', 'glmark2', '', d)}"
