@@ -11,7 +11,7 @@ PV .= "+git"
 
 SRC_URI = "\
     git://github.com/lvgl/lv_port_linux_frame_buffer.git;protocol=https;branch=release/v9.5;name=demo \
-    git://github.com/lvgl/lvgl;protocol=https;branch=release/v9.5;tag=v9.5.0;name=lvgl;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/lvgl \
+    git://github.com/lvgl/lvgl;protocol=https;branch=release/v9.5;name=lvgl;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/lvgl \
 "
 
 SRCREV_demo = "045137cf0fa1781483cb796261a11b5eb21e99d9"

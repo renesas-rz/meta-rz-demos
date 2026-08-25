@@ -9,7 +9,7 @@ HOMEPAGE = "https://lvgl.io/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENCE.txt;md5=4570b6241b4fced1d1d18eb691a0e083"
 
-SRC_URI = "git://github.com/lvgl/lvgl;protocol=https;branch=release/v9.5;tag=v9.5.0"
+SRC_URI = "git://github.com/lvgl/lvgl;protocol=https;branch=release/v9.5"
 
 SRCREV = "85aa60d18b3d5e5588d7b247abf90198f07c8a63"
 
