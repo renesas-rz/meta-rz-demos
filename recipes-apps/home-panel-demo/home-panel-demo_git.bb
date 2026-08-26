@@ -11,7 +11,7 @@ SRC_URI = " \
 	git://github.com/renesas-rz/rzg_hmi_sdk.git;protocol=https;branch=main \
 	file://chromium-app.sh 	\
 "
-SRCREV = "d55825b3719309d868977a7cc3f0b329750664a2"
+SRCREV = "80bb68314c4a24b1ea32940eb7e7bc27f8095707"
 
 PV = "2.0+git${SRCPV}"
 
@@ -33,6 +33,8 @@ do_compile() {
         npm run build:RZG2LC
     elif [ "${MACHINE}" = "smarc-rzg3e" ]; then
         npm run build:RZG3E
+    elif [ "${MACHINE}" = "smarc-rzg3l" ]; then
+        npm run build:RZG3L
     else
         npm run build
     fi
