@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9da82885c90b317db044f6bfba5652db"
 SRC_URI = " \
 	git://github.com/renesas-rz/rzg_hmi_sdk.git;protocol=https;branch=main \
 "
-SRCREV = "d55825b3719309d868977a7cc3f0b329750664a2"
+SRCREV = "80bb68314c4a24b1ea32940eb7e7bc27f8095707"
 
 PV = "2.0+git${SRCPV}"
 
@@ -24,6 +24,11 @@ TARGET_CFLAGS +=  "${@oe.utils.conditional('MACHINE', 'smarc-rzg2lc', '-I${STAGI
 
 DEPENDS += "${@oe.utils.conditional('MACHINE', 'smarc-rzg3e', 'gstreamer1.0', '', d)}"
 TARGET_CFLAGS +=  "${@oe.utils.conditional('MACHINE', 'smarc-rzg3e', '-I${STAGING_DIR_HOST}/usr/include/gstreamer-1.0', '', d)}"
+
+DEPENDS += "${@oe.utils.conditional('MACHINE', 'smarc-rzg3l', 'gstreamer1.0', '', d)}"
+TARGET_CFLAGS +=  "${@oe.utils.conditional('MACHINE', 'smarc-rzg3l', '-I${STAGING_DIR_HOST}/usr/include/gstreamer-1.0', '', d)}"
+
+PATCHTOOL = "git"
 
 do_compile () {
     cd ${S}
